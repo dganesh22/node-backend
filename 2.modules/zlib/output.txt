@@ -1,0 +1,6 @@
+THis is my first line of content
+this is second line of content
+welcome to nodejs
+we are working readline module
+it reads the data line by line
+it's nodejs module
