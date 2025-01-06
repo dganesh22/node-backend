@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .menu {
+            height: 60px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: slateblue;
+        }
+
+        .menu .container {
+            height: 100%;
+            width: 80%;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .menu .logo {
+            text-decoration: none;
+            color: #fff;
+            font-size: 2rem;
+        }
+
+        .menu .menu-item a {
+            font-size: 1.1rem;
+            color: #fff;
+            padding: 8px 10px;
+            text-decoration: none;
+        }
+
+        .menu-item a:hover {
+            background-color: #fff;
+            color: slateblue;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="menu">
+        <div class="container">
+            <a href="/" class="logo">EJS Project</a>
+
+            <div class="menu-item">
+                <a href="/">Home</a>
+                <a href="/add/user">Add User</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="home-container">
+        <div class="title">
+            <h1>Add User</h1>
+        </div>
+
+        <div>
+            <form id="regForm">
+                <div>
+                    <label for="name">Your name</label>
+                    <input type="text" name="name" id="name" class="form-item" required>
+                </div>
+
+                <div>
+                    <label for="email">Your Email</label>
+                    <input type="email" name="email" id="email" class="form-item" required>
+                </div>
+
+                <div>
+                    <label for="pass">Your Password</label>
+                    <input type="password" name="pass" id="pass" class="form-item" required>
+                </div>
+
+                <div>
+                    <input type="submit" value="Add User" class="btn">
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- <script src="app.js"></script> -->
+    <script>
+        let regForm = document.getElementById("regForm")
+
+        let nameEl = document.getElementById("name")
+        let emailEl = document.getElementById("email")
+        let passEl = document.getElementById("pass")
+
+        regForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            let user = {
+                name: nameEl.value,
+                email: emailEl.value,
+                password: passEl.value
+            };
+
+            console.log(`user =`, user)
+        });
+    </script>
+</body>
+
+</html>
