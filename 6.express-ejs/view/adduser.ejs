@@ -53,6 +53,49 @@
             background-color: #fff;
             color: slateblue;
         }
+
+        #regForm {
+            width: 40%;
+            margin: auto;
+            border: 2px solid #ccc;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        #regForm div {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        #regForm .form-item {
+            padding: 10px 12px;
+            width: 70%;
+            outline: none;
+            border: 2px solid #ccc;
+        }
+
+        .btn {
+            padding: 10px 12px;
+            border: none;
+            background-color: green;
+            color: #fff;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        @media screen and (max-width:990px) {
+            #regForm {
+                width: 90%;
+                margin: auto;
+            }
+        }
     </style>
 </head>
 
@@ -105,7 +148,7 @@
         let emailEl = document.getElementById("email")
         let passEl = document.getElementById("pass")
 
-        regForm.addEventListener("submit", function (e) {
+        regForm.addEventListener("submit", async (e) => {
             e.preventDefault();
 
             let user = {
@@ -115,6 +158,19 @@
             };
 
             console.log(`user =`, user)
+
+            await fetch(`/api/user/add`, {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify(user)
+            }).then(res => res.json())
+                .then(res => {
+                    console.log(res)
+                    alert(res.msg)
+                    window.location.href = "/"
+                }).catch(err => console.log(err.message))
         });
     </script>
 </body>

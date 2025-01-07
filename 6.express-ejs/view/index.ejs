@@ -24,7 +24,59 @@
         <div class="title">
             <h1>Add User</h1>
         </div>
+
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Active</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% users.forEach(item=> { %>
+                        <tr>
+                            <td>
+                                <%= item.name %>
+                            </td>
+                            <td>
+                                <%= item.email %>
+                            </td>
+                            <td>
+                                <%= item.password %>
+                            </td>
+                            <td>
+                                <%= item.isActive %>
+                            </td>
+                            <td>
+                                <a href="/" class="success">Edit</a>
+                                <a href="/" class="danger">Delete</a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+        </div>
     </section>
+
+    <script>
+        const readUser = async () => {
+            await fetch(`/api/user/all`, {
+                method: "GET",
+                headers: {
+                    "content-type": "application/json"
+                }
+            }).then(res => res.json())
+                .then(res => {
+                    console.log(`users =`, res)
+                }).catch(err => console.log(err.message))
+        }
+
+        readUser()
+    </script>
 </body>
 
 </html>

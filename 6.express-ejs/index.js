@@ -3,11 +3,16 @@ const express = require('express')
 require('dotenv').config()
 const cors = require('cors') // middleware -> cross origin resource sharing
 const { defaultController } = require('./controller/appController')
+const connectDb = require('./db/config')
 
 const port_num = process.env.PORT
 
 // instance of express
 const app = express()
+
+// body parser
+app.use(express.urlencoded({ extended: true })) // urlencoded data
+app.use(express.json()) // json data
 
 
 // view folder as static
@@ -35,5 +40,6 @@ app.all(`/*`, defaultController)
 
 // server listener
 app.listen(port_num, () => {
+    connectDb()
     console.log(`server is running @ http://localhost:${port_num}`)
 })
