@@ -39,6 +39,23 @@ const addUser = async (req, res) => {
     }
 }
 
+//edit user
+const editUser = async (req, res) => {
+    try {
+        let id = req.params.id
+
+        // read user info
+        let exUser = await User.findById(id)
+        if (!exUser) {
+            return res.render("update.ejs", { msg: "user info not found" })
+        }
+
+        res.render('update.ejs', { user: exUser })
+    } catch (err) {
+        res.status(500).json({ msg: err.message })
+    }
+}
+
 
 // read user data
 const readAll = async (req, res) => {
@@ -52,6 +69,44 @@ const readAll = async (req, res) => {
     }
 }
 
+// update api
+const userUpdate = async (req, res) => {
+    try {
+        let id = req.params.id
+        let data = req.body
+        // user id exists or not
+        let extUser = await User.findById(id)
+        if (!extUser)
+            return res.status(404).json({ msg: 'requested user not found' })
+        // updating the user info
+        await User.findByIdAndUpdate({ _id: id }, data)
+        // response
+        res.status(201).json({ msg: "user data updated successfully" })
+
+    } catch (err) {
+        return res.status(500).json({ msg: err.message })
+    }
+}
+
+
+// delete api
+const userDelete = async (req, res) => {
+    try {
+        let id = req.params.id
+
+        // user id exists or not
+        let extUser = await User.findById(id)
+        if (!extUser)
+            return res.status(404).json({ msg: 'requested user not found' })
+
+        await User.findByIdAndDelete({ _id: id })
+
+        return res.status(200).json({ msg: `User info deleted successfully` })
+    } catch (err) {
+        return res.status(500).json({ msg: err.message })
+    }
+}
+
 const defaultController = async (req, res) => {
     try {
         res.render('notfound.ejs')
@@ -60,4 +115,4 @@ const defaultController = async (req, res) => {
     }
 }
 
-module.exports = { homeController, addController, addUser, readAll, defaultController }
+module.exports = { homeController, addController, addUser, readAll, editUser, userUpdate, userDelete, defaultController }

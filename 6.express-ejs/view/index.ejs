@@ -22,7 +22,7 @@
     </nav>
     <section class="home-container">
         <div class="title">
-            <h1>Add User</h1>
+            <h1>User Data</h1>
         </div>
 
         <div>
@@ -52,8 +52,8 @@
                                 <%= item.isActive %>
                             </td>
                             <td>
-                                <a href="/" class="success">Edit</a>
-                                <a href="/" class="danger">Delete</a>
+                                <a href="/edit/user/<%= item._id %>" class="success">Edit</a>
+                                <button onclick="deleteHandler('<%= item._id %>')" class="danger">Delete</button>
                             </td>
                         </tr>
                         <% }) %>
@@ -76,6 +76,24 @@
         }
 
         readUser()
+
+
+        const deleteHandler = async (id) => {
+            if (window.confirm(`Are you sure to delete user id ${id}?`)) {
+                await fetch(`/api/user/delete/${id}`, {
+                    method: "DELETE",
+                    headers: {
+                        "content-type": "application/json"
+                    }
+                }).then(res => res.json())
+                    .then(res => {
+                        alert(res.msg)
+                        window.location.reload()
+                    }).catch(err => alert(err.message))
+            } else {
+                alert('delete terminated')
+            }
+        }
     </script>
 </body>
 

@@ -45,6 +45,14 @@ body {
     color: slateblue;
 }
 
+.home-container {
+    margin-top: 5rem;
+}
+
+.home-container .title {
+    text-align: center;
+}
+
 table {
     width: 80%;
     text-align: center;
@@ -64,7 +72,8 @@ th {
     padding: 10px;
 }
 
-table a {
+table a,
+button {
     padding: 8px 10px;
     border: none;
     cursor: pointer;

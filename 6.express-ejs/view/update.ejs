@@ -122,28 +122,32 @@
 
     <section class="home-container">
         <div class="title">
-            <h1>Add User</h1>
+            <h1>Update User</h1>
+            <p>
+                <%= user._id %>
+            </p>
         </div>
 
         <div>
             <form id="regForm">
                 <div>
                     <label for="name">Your name</label>
-                    <input type="text" name="name" id="name" class="form-item" required>
+                    <input type="text" name="name" id="name" class="form-item" value="<%= user.name %>" required>
                 </div>
 
                 <div>
                     <label for="email">Your Email</label>
-                    <input type="email" name="email" id="email" class="form-item" required>
+                    <input type="email" name="email" id="email" class="form-item" value="<%= user.email %>" required>
                 </div>
 
                 <div>
                     <label for="pass">Your Password</label>
-                    <input type="password" name="pass" id="pass" class="form-item" required>
+                    <input type="password" name="pass" id="pass" class="form-item" value="<%= user.password %>"
+                        required>
                 </div>
 
                 <div>
-                    <input type="submit" value="Add User" class="btn">
+                    <input type="submit" value="Update User" class="btn">
                 </div>
             </form>
         </div>
@@ -168,8 +172,8 @@
 
             console.log(`user =`, user)
 
-            await fetch(`/api/user/add`, {
-                method: "POST",
+            await fetch(`/api/user/update/<%= user._id %>`, {
+                method: "PATCH",
                 headers: {
                     "content-type": "application/json"
                 },
